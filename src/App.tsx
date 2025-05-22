@@ -1,10 +1,10 @@
 import './App.css'
-import { Grid } from '@mui/material'
-import { Circle, type Status } from './components/Circle';
+import { type Status } from './components/Circle';
 import { useState } from 'react';
 import { ROWS, COLUMNS } from './logic/constants';
 import { checkWinner } from './logic/logic';
 import { GameSnackbar } from './components/Snackbar';
+import { Board } from './components/Board';
 
 
 export const App = () => {
@@ -23,7 +23,6 @@ export const App = () => {
         break;
       }
     }
-    console.log("Clicked column", colIdx, "turn", turn, "newBoard", newBoard);
     setBoard(newBoard);
     if (checkWinner(newBoard, turn)) {
       setWinner(turn);
@@ -38,46 +37,16 @@ export const App = () => {
         resetHandler={() => {
           setWinner(0);
           setBoard(Array.from({ length: COLUMNS }, () => Array(ROWS).fill(0 as Status)));
-          setTurn(1); 
+          setTurn(1);
         }}
         winner={winner}
       />
 
-      <Grid
-        container
-        spacing={2}
-        justifyContent={'center'}
-        alignItems='center'
-        sx={{ border: 2, padding: 2, width: 'auto' }}
-      >
-        {Array.from({ length: COLUMNS }).map((_, colIdx) => {
+      <Board
+        board={board}
+        clickHandler={handleClick}
+      />
 
-          return (
-            <Grid
-              container
-              direction="column"
-              key={colIdx}
-              spacing={2}
-              onClick={() => handleClick(colIdx)}
-            >
-              {Array.from({ length: ROWS }).map((_, rowIdx) => {
-
-                const displayRowIdx = ROWS - 1 - rowIdx; // Reverse the index to start from the bottom
-                return (
-                  <Circle
-                    id={[colIdx, rowIdx]} // Row and column index
-                    color={board[colIdx][rowIdx] as Status} // Color of the circle
-                  >
-                    {`${displayRowIdx}${colIdx}`}
-                  </Circle>
-                )
-
-              })}
-            </Grid>
-          )
-
-        })}
-      </Grid>
     </div>
   )
 }
