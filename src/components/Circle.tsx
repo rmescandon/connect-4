@@ -1,10 +1,11 @@
-import { useState } from 'react'
 import { Box } from '@mui/material'
 
 const SIZE = 80;
 // const COLOR = '#1976d2'
 
-type Status = 'red' | 'blue' | 'lightgray'
+
+export type Status = 0 | 1 | 2
+// 0 = lightgray, 1 = red, 2 = blue
 
 type Props = {
     children: React.ReactNode
@@ -12,14 +13,14 @@ type Props = {
     color: Status // Color of the circle
 }
 
-export const Circle = ({ children, id, color }: Props) => {
+export const Circle = ({ children, color }: Props) => {
     return (
         <Box
             sx={{
                 width: SIZE,
                 height: SIZE,
                 borderRadius: '50%',
-                bgcolor: color,
+                bgcolor: color == 0 ? 'lightgray' : color == 1 ? 'red' : 'blue',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
