@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 
 const SIZE = 80;
 
-export type Status = 0 | 1 | 2
+export type Status = 0 | 1 | 2 | -1; // 0 = empty, 1 = red, 2 = blue, -1 = none
 // 0 = lightgray, 1 = red, 2 = blue
 
 type Props = {

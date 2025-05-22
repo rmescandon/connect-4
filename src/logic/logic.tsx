@@ -1,6 +1,17 @@
 import { ROWS, COLUMNS } from "./constants";
 import type { Status } from "../components/Circle";
 
+export const checkFullBoard = (board: Array<Array<Status>>) => {
+  for (let col = 0; col < COLUMNS; col++) {
+    for (let row = 0; row < ROWS; row++) {
+      if (board[col][row] === 0) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 export const checkWinner = (board: Array<Array<Status>>, player: Status) => {
   // Check horizontal
   for (let row = 0; row < ROWS; row++) {
