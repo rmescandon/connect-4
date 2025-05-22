@@ -9,7 +9,7 @@ type Props = {
 
 export const GameSnackbar = ({ resetHandler, winner }: Props) => {
     const handleClose = (
-        event?: React.SyntheticEvent | Event,
+        _event?: React.SyntheticEvent | Event,
         reason?: SnackbarCloseReason,
     ) => {
         if (reason === 'clickaway') {
