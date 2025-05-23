@@ -1,6 +1,6 @@
 import './App.css'
 import { type Status } from './components/Circle';
-import { useState } from 'react';
+import { useState, useCall, useCallback } from 'react';
 import { ROWS, COLUMNS } from './logic/constants';
 import { checkWinner, checkFullBoard } from './logic/logic';
 import { GameSnackbar } from './components/Snackbar';
@@ -12,7 +12,7 @@ export const App = () => {
   const [winner, setWinner] = useState<Status>(0); // 0 = no winner, 1 = red, 2 = blue
   const [board, setBoard] = useState<Array<Array<Status>>>(Array.from({ length: COLUMNS }, () => Array(ROWS).fill(0 as Status))); // 0 = empty, 1 = red, 2 = blue
 
-  const handleClick = (colIdx: number) => {
+  const handleClick = useCallback((colIdx: number) => {
     if (winner !== 0) {
       return;
     }
@@ -30,17 +30,17 @@ export const App = () => {
       setWinner(-1); // -1 = draw
     }
     setTurn(turn === 1 ? 2 : 1);
-  }
+  }, [board, turn, winner]);
 
   return (
     <div className="App">
 
       <GameSnackbar
-        resetHandler={() => {
+        resetHandler={useCallback(() => {
           setBoard(Array.from({ length: COLUMNS }, () => Array(ROWS).fill(0 as Status)));
           setWinner(0);
           setTurn(1);
-        }}
+        },[])}
         winner={winner}
       />
 
