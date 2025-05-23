@@ -5,6 +5,7 @@ import { ROWS, COLUMNS } from './logic/constants';
 import { checkWinner, checkFullBoard } from './logic/logic';
 import { GameSnackbar } from './components/Snackbar';
 import { Board } from './components/Board';
+import confetti from 'canvas-confetti';
 
 
 export const App = () => {
@@ -25,6 +26,7 @@ export const App = () => {
     }
     setBoard(newBoard);
     if (checkWinner(newBoard, turn)) {
+      confetti();
       setWinner(turn);
     } else if (checkFullBoard(newBoard)) {
       setWinner(-1); // -1 = draw
