@@ -1,6 +1,6 @@
 import './App.css'
 import { type Status } from './components/Circle';
-import { useState, useCall, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { ROWS, COLUMNS } from './logic/constants';
 import { checkWinner, checkFullBoard } from './logic/logic';
 import { GameSnackbar } from './components/Snackbar';
